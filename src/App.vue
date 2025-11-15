@@ -11,10 +11,10 @@ import Category from './components/Category.vue';
 // import Pic9 from './assets/images/cat-14 1.png';
 // import Pic10 from './assets/images/cat-7 1.png';
 import Promotion from './components/Promotion.vue';
-import Promote1 from './assets/images/Cms-04 1.png';
-import Promote2 from './assets/images/Cat-01 1.png';
-import Promote3 from './assets/images/Cms-03 1.png';
-import { computed, onMounted } from 'vue';
+// import Promote1 from './assets/images/Cms-04 1.png';
+// import Promote2 from './assets/images/Cat-01 1.png';
+// import Promote3 from './assets/images/Cms-03 1.png';
+import { onMounted } from 'vue';
 import { ref } from 'vue';
 import type { Ref } from 'vue';
 import axios from 'axios';
@@ -50,11 +50,11 @@ const promotions: Ref<Promotion[] | null> = ref(null);
 //   { item: Pic10, message: "Orange", amount: 63, color: "#FFF3FF" },
 // ]
 
-const Promotions = [
-  {text: "Everyday Fresh & Clean with Our Products", color: "#F0E8D5", pic: Promote1, btnColor: "#3BB77E"},
-  {text: "Make your Breakfast Healthy and Easy", color: "#F3E8E8", pic: Promote2, btnColor: "#3BB77E"},
-  {text: "The best Organic Products Online", color: "#E7EAF3", pic: Promote3, btnColor: "#FDC040"},
-]
+// const Promotions = [
+//   {text: "Everyday Fresh & Clean with Our Products", color: "#F0E8D5", pic: Promote1, btnColor: "#3BB77E"},
+//   {text: "Make your Breakfast Healthy and Easy", color: "#F3E8E8", pic: Promote2, btnColor: "#3BB77E"},
+//   {text: "The best Organic Products Online", color: "#E7EAF3", pic: Promote3, btnColor: "#FDC040"},
+// ]
 
 const fetchCategories = async () => {
   try{
@@ -74,7 +74,7 @@ const fetchPromotions = async () => {
   }
 }
 
-onMounted(async () => {
+onMounted(() => {
   fetchCategories();
   fetchPromotions();
 })

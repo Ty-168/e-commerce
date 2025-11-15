@@ -13,7 +13,7 @@ const props = defineProps<{
 
 const getImages = computed(() => {
   if (!props.picture) return '';
-  return `${API_BASE_URL}/${props.picture}`
+  return `${API_BASE_URL}${props.picture}`
 });
 
 console.log(getImages);
