@@ -20,7 +20,7 @@ const getImage = computed(() => {
 
 <template>
   <div
-    class="w-[480px] h-64 relative flex flex-col justify-center rounded-md px-4"
+    class="w-[470px] h-64 relative flex flex-col justify-center rounded-md px-4"
     :style="{ backgroundColor: props.color }"
   >
     <div class="flex flex-col items-start z-1 gap-3 w-56 px-4">
