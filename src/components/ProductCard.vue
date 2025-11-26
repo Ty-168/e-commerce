@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || '';
-
 
 interface Product{
     name: string
@@ -14,6 +13,9 @@ interface Product{
     instock: number
     countSold: number
 }
+
+const isAdded = ref(false)
+const quantity = ref(1)
 
 const props = defineProps<Product>();
 
@@ -48,7 +50,20 @@ const producImage = computed(() => {
     const pathImage = JSON.parse(props.image);
     return `${API_BASE_URL}${pathImage}`
 })
-console.log(producImage);
+
+const handleAddClick = () => {
+  // 1. Change the state to show the input
+  isAdded.value = true
+  // 2. Perform your actual logic to add the item to the cart
+  console.log('Item added to cart!')
+}
+
+const updateQuantity = (newQuantity: number) => {
+  // Update the quantity and potentially sync with your cart state
+  quantity.value = newQuantity
+  console.log('New Quantity:', newQuantity)
+}
+
 </script>
 
 <template>
@@ -125,10 +140,12 @@ console.log(producImage);
                     <span class="text-xl font-bold text-[#3BB77E]">${{ discount }}</span>
                     <span v-if="props.promotion > 0" class="text-sm line-through font-medium text-[#7E7E7E]">${{ props.price }}</span>
                 </div>
-                <button type="button" class="inline-flex items-center gap-1 font-bold text-[#3BB77E] bg-[#DEF9EC] hover:bg-[#DEF9EC]/75 box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs leading-5 rounded-md text-sm px-2 py-1 focus:outline-none">
+
+                <button v-if="!isAdded" @click="handleAddClick" type="button" class="inline-flex items-center gap-1 font-bold text-[#3BB77E] bg-[#DEF9EC] hover:bg-[#DEF9EC]/75 box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs leading-5 rounded-md text-sm px-2 py-1 focus:outline-none">
                     Add 
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" id="plus"><path fill="#3BB77E" d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z"></path></svg>
                 </button>
+                <input  v-else type="number" class="w-16 h-8 rounded-2 rounded text-[#3BB77E] font-bold border-2 " :value="quantity"/>
             </div>
         </div>
     </div>
