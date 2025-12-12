@@ -1,36 +1,8 @@
+import type { Category, Product, Promotion } from "@/types/Product";
 import axios from "axios";
 import { defineStore } from "pinia";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || '';
-
-export interface Category {
-  image: string;
-  name: string;
-  productCount: string;
-  color: string;
-  group: string;
-  id: string;
-}
-
-export interface Promotion {
-  title: string;
-  color: string;
-  image: string;
-  buttonColor: string;
-}
-
-export interface Product {
-  name: string;
-  rating: string;
-  size: string;
-  image: string;
-  price: number;
-  promotionAsPercentage: number;
-  categoryId: string;
-  instock: number;
-  countSold: number;
-  group: string;
-}
 
 export interface Products {
     categories: Category[];
@@ -63,12 +35,18 @@ export const useProductStore = defineStore('product', {
         getCategoriesByGroup: (state) => {
           return (groupName: string) => state.categories.filter((category) => category.group === groupName)
         },
+
+        getCategoriesById: (state) => {
+          // FIX: Use find() to return a single category object or undefined
+          return (categoryId: string) => state.categories.find((category) => String(category.id) === String(categoryId))
+        },
         getProductsByCategory: (state) => {
-          return (categoryId: string) => state.products.filter((product) => product.categoryId === categoryId)
+          return (categoryId: string) => state.products.filter((product) => String(product.categoryId) === String(categoryId))
         },
         getProductsByGroup: (state) => {
           return (groupName: string) => state.products.filter((product) => product.group === groupName);
         }
+        
        // more getters here
   },
   actions: {

@@ -1,8 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Battambang:wght@100;300;400;700;900&family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import "flowbite/src/themes/default";
 @import "tailwindcss";
 @import "flowbite/dist/flowbite.css";
 
 #app{
   height: 100vh;
   font-family: "Quicksand";
+}
+
+@theme {
+  --color-primary: #3BB77E;
+  --color-secondary: #FDC040;
+  --color-accent: #3BB77E33;
+  
+  --color-success: #DEF9EC;
+  --color-success-text: #3BB77E;
+  --color-disable-text: #B6B6B6;
 }

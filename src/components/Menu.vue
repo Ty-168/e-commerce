@@ -20,7 +20,7 @@ const selectGroup = (groupName: string) => {
         <li class="me-2">
             <button 
                 @click="selectGroup('All')"
-                :class="{'text-green-500 border-green-500': props.selectedGroup === 'All', 'hover:text-fg-brand hover:border-brand': props.selectedGroup !== 'All'}"
+                :class="{'text-primary border-primary': props.selectedGroup === 'All', 'hover:text-primary hover:border-primary': props.selectedGroup !== 'All'}"
                 class="inline-block p-4 border-b border-transparent rounded-t-base"
             >All
           </button>
@@ -28,7 +28,7 @@ const selectGroup = (groupName: string) => {
         <li class="me-2" v-for="menu in props.menus">
             <button 
                 @click="selectGroup(menu)"
-                :class="{'text-green-500 border-green-500': props.selectedGroup === menu, 'hover:text-fg-brand hover:border-brand': props.selectedGroup !== menu}"
+                :class="{'text-primary border-primary': props.selectedGroup === menu, 'hover:text-primary hover:border-primary': props.selectedGroup !== menu}"
                 class="inline-block p-4 border-b border-transparent rounded-t-base"
             >{{ menu }}
           </button>

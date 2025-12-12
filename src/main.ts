@@ -6,9 +6,9 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import { initFlowbite } from 'flowbite'
 
-
+import router from './router'
 const app = createApp(App)
-
+app.use(router)
 onMounted(() => {
     initFlowbite();
 })
