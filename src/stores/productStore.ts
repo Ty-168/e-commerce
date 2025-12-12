@@ -36,17 +36,20 @@ export const useProductStore = defineStore('product', {
           return (groupName: string) => state.categories.filter((category) => category.group === groupName)
         },
 
-        getCategoriesById: (state) => {
-          // FIX: Use find() to return a single category object or undefined
-          return (categoryId: string) => state.categories.find((category) => String(category.id) === String(categoryId))
-        },
         getProductsByCategory: (state) => {
           return (categoryId: string) => state.products.filter((product) => String(product.categoryId) === String(categoryId))
         },
         getProductsByGroup: (state) => {
           return (groupName: string) => state.products.filter((product) => product.group === groupName);
-        }
+        },
         
+        // Get By ID
+        getCategoriesById: (state) => {
+          return (categoryId: string) => state.categories.find((category) => String(category.id) === String(categoryId))
+        },
+        getProductById: (state) => {
+          return (productId: string) => state.products.find((product) => String(product.id) === String(productId))
+        },
        // more getters here
   },
   actions: {

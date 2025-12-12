@@ -53,10 +53,7 @@ const products : Ref<Product[] | null> = computed(() => {
   return listToFilter;
 });
 
-// function HotDeal (() => {
-//   const productCounts = categories.value?.map(category => category.productCount);
-//   return Math.max(Number(productCounts));
-// });
+
 
 
 onMounted(() => {
@@ -98,7 +95,7 @@ const menu = computed(() => {
           :isSelected="cat.id === selectedProductCategory"
         />
       </TransitionGroup>
-      <div class="flex flex-row flex-wrap gap-2 justify-between items-center">
+      <div class="flex flex-row flex-wrap gap-4 justify-center items-center">
         <PromotionCard
           v-for="(promo, index) in promotions"
           :key="index"
@@ -120,14 +117,17 @@ const menu = computed(() => {
         <ProductCard 
           v-for="(product, index) in products" 
           :key="index"
+          :id="product.id"
           :name="product.name"
           :rating="product.rating"
           :size="product.size"
           :image="product.image"
           :price="product.price"
-          :promotion="product.promotionAsPercentage"
+          :promotion-as-percentage="product.promotionAsPercentage"
           :count-sold="product.countSold"
           :instock="product.instock"
+          :group="product.group"
+          :category-id="product.categoryId"
           />
       </TransitionGroup>
     </div>

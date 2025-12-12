@@ -19,7 +19,8 @@ const getImage = computed(() => {
 </script>
 
 <template>
-  <div
+  <router-link
+    :to="{name: 'product', params: {productId: '0'}}"
     class="w-[410px] h-64 relative flex flex-col justify-center rounded-md px-4"
     :style="{ backgroundColor: props.color }"
   >
@@ -28,5 +29,5 @@ const getImage = computed(() => {
       <Button :btncolor="props.btncolor" :title="props.text" />
     </div>
     <img :src="getImage" alt="pic" class="absolute bottom-0 right-0 h-46 w-auto object-contain" />
-  </div>
+  </router-link>
 </template>

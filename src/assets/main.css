@@ -15,5 +15,7 @@
   
   --color-success: #DEF9EC;
   --color-success-text: #3BB77E;
+  --color-error: #ff6969;
+  --color-error-text: #dc2626;
   --color-disable-text: #B6B6B6;
 }

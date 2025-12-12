@@ -13,7 +13,6 @@ const categoryId: string = route.params.id as string;
 console.log(categoryId);
 const categoryName = computed(() => {
     const id = route.params.id as string;
-    if(!id) return productStore.getCategories()?.name;
     return productStore.getCategoriesById(id)?.name;
 })
 
@@ -39,18 +38,21 @@ onMounted(() => {
             :name="categoryName"
         />
         <TransitionGroup name="fade" tag="div" class="flex flex-row flex-wrap gap-6 justify-center items-center">
-            <ProductCard 
-            v-for="(product, index) in products" 
-            :key="index"
-            :name="product.name"
-            :rating="product.rating"
-            :size="product.size"
-            :image="product.image"
-            :price="product.price"
-            :promotion="product.promotionAsPercentage"
-            :count-sold="product.countSold"
-            :instock="product.instock"
-            />
+        <ProductCard 
+          v-for="(product, index) in products" 
+          :key="index"
+          :id="product.id"
+          :name="product.name"
+          :rating="product.rating"
+          :size="product.size"
+          :image="product.image"
+          :price="product.price"
+          :promotion-as-percentage="product.promotionAsPercentage"
+          :count-sold="product.countSold"
+          :instock="product.instock"
+          :group="product.group"
+          :category-id="product.categoryId"
+          />
         </TransitionGroup>
     </div>
 

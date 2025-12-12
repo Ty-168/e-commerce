@@ -2,21 +2,37 @@
 
 import { IconArrowsShuffle, IconHeart, IconShoppingCart } from '@tabler/icons-vue';
 import Rating from '../ui/Rating.vue';
+import type { Product } from '@/types/Product';
+import { computed } from 'vue';
 
 const rating = "4";
+const props = defineProps<{
+    products: Product
+}>();
+
+const discount = computed(() => {
+    // Check for division by zero
+    if (!props.products.price || props.products.price <= 0) return '0.00';
+    const rawPercentage = props.products.price * (1 - (props.products.promotionAsPercentage / 100));
+    return rawPercentage.toFixed(2);
+});
+
 </script>
 
 <template>
 
-<div class="w-1/2 flex flex-col gap-4 justify-between">
-    <div class="w-1/6 bg-success text-success-text mix-w-3xs text-sm py-1 text-center rounded-sm">
+<div class="w-full p-5 lg:w-1/2 lg:p-0 flex flex-col gap-4 justify-between">
+    <div v-if="props.products.instock > 0" class="w-1/6 bg-success text-success-text mix-w-3xs text-sm py-1 text-center rounded-sm">
         In Stock
     </div>
-    <p class="font-bold text-4xl">Seeds of Change Organic Quinoa, Brown</p>
-    <Rating :rating="rating"/>
-    <div class="w-1/3 flex flex-row items-end justify-between">
-        <span class="text-primary font-bold text-6xl">$38</span>
-        <span class="line-through text-disable-text text-3xl font-bold">$42</span>
+    <div v-else class="w-1/6 bg-error text-error-text mix-w-3xs text-sm py-1 text-center rounded-sm">
+        Out of Stock
+    </div>
+    <p class="font-bold text-4xl">{{ props.products.name }}</p>
+    <Rating :rating="props.products.rating"/>
+    <div class="flex flex-row items-end gap-5">
+        <span class="text-primary font-bold text-6xl">${{ discount }}</span>
+        <span v-if="props.products.promotionAsPercentage > 0" class="line-through text-disable-text text-3xl font-bold">${{ props.products.price }}</span>
     </div>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla eum amet voluptates earum officiis deleniti reprehenderit labore! Ipsum suscipit architecto ullam voluptate nihil fugiat, vel quas, illo, accusantium praesentium eaque.</p>
     <div class="w-full flex flex-row gap-3 items-center">
