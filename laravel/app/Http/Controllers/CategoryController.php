@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Facades\Gate;
 
 class CategoryController extends Controller
 {
@@ -16,6 +17,8 @@ class CategoryController extends Controller
 
     public function createCategory(Request $request)
     {
+        Gate::authorize('categories.create');
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -28,11 +31,14 @@ class CategoryController extends Controller
     public function getCategory($categoryId)
     {
         $category = Category::findOrFail($categoryId);
+        Gate::authorize('view', $category);
         return response()->json($category);
     }
 
     public function updateCategory(Request $request, $categoryId)
     {
+        Gate::authorize('categories.update');
+
         $category = Category::findOrFail($categoryId);
 
         $validated = $request->validate([

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
+use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
@@ -16,6 +17,7 @@ class ProductController extends Controller
 
 	public function createProduct(Request $request)
 	{
+		Gate::authorize('products.create');
 		$validated = $request->validate([
 			'name' => 'required|string|max:255',
 			'description' => 'nullable|string',
@@ -54,6 +56,7 @@ class ProductController extends Controller
 
 	public function updateProduct(Request $request, $productId)
 	{
+		Gate::authorize('products.update');
 		$product = Product::findOrFail($productId);
 
 		$validated = $request->validate([
@@ -67,6 +70,7 @@ class ProductController extends Controller
 
 	public function deleteProduct($productId)
 	{
+		Gate::authorize('products.delete');
 		$product = Product::findOrFail($productId);
 		$product->delete();
 		return response()->json(['message' => 'Product deleted successfully'], 200);
