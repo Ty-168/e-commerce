@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -60,5 +62,24 @@ class User extends Authenticatable
         return $this->roles()
             ->whereHas('permissions', fn($q) => $q->where('name', $permission))
             ->exists();
+    }
+
+    // Tp7
+    // (1) User → Author
+    public function author(): HasOne
+    {
+        return $this->hasOne(Author::class);
+    }
+
+    // (2) User → Audiences
+    public function audiences(): HasMany
+    {
+        return $this->hasMany(Audience::class);
+    }
+
+    // (8) User → Comments
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 }
